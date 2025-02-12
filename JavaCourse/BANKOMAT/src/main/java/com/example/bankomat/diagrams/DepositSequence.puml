@@ -1,0 +1,15 @@
+@startuml
+actor User
+participant DepositController
+participant Bankomat
+
+User -> DepositController: onConfirmButton(ActionEvent)
+DepositController -> Bankomat: makeWplata(depositAmount)
+alt Successful deposit
+    DepositController -> DepositController: print("Deposited: " + depositAmount)
+    DepositController -> DepositController: print("Balance: " + bankomat.getUserSaldo())
+else Failed deposit
+    DepositController -> DepositController: print("Deposit failed.")
+end
+DepositController -> DepositController: close()
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+actor User
+participant ChangePinController
+participant Bankomat
+
+User -> ChangePinController: onConfirmButton(ActionEvent)
+ChangePinController -> Bankomat: updatePIN(oldPin, newPin)
+alt Successful PIN change
+    ChangePinController -> ChangePinController: print("PIN changed successfully.")
+else Failed PIN change
+    ChangePinController -> ChangePinController: print("PIN change failed.")
+end
+ChangePinController -> ChangePinController: close()
+@enduml

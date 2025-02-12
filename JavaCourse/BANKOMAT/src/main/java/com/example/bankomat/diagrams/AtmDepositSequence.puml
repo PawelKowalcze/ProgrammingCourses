@@ -1,0 +1,15 @@
+@startuml
+actor User
+participant AtmDepositController
+participant Bankomat
+
+User -> AtmDepositController: onConfirmButton(ActionEvent)
+AtmDepositController -> Bankomat: makeDeposit(depositAmount)
+alt Successful deposit
+    AtmDepositController -> AtmDepositController: print("Deposited: " + depositAmount)
+    AtmDepositController -> AtmDepositController: print("Balance: " + bankomat.getUserSaldo())
+else Failed deposit
+    AtmDepositController -> AtmDepositController: print("Deposit failed.")
+end
+AtmDepositController -> AtmDepositController: close()
+@enduml

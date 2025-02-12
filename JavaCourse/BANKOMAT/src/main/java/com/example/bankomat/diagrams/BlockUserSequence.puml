@@ -1,0 +1,14 @@
+@startuml
+actor Admin
+participant BlockUserController
+participant Bankomat
+
+Admin -> BlockUserController: onBlockUserButton(ActionEvent)
+BlockUserController -> Bankomat: blockUser(userLogin)
+alt Successful block
+    BlockUserController -> BlockUserController: print("User blocked: " + userLogin)
+else Failed block
+    BlockUserController -> BlockUserController: print("Block failed.")
+end
+BlockUserController -> BlockUserController: refresh()
+@enduml

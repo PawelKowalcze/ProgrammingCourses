@@ -1,0 +1,15 @@
+@startuml
+actor User
+participant TransferController
+participant Bankomat
+
+User -> TransferController: onConfirmButton(ActionEvent)
+TransferController -> Bankomat: makeBankTransfer(toAccount, transferAmount)
+alt Successful transfer
+    TransferController -> TransferController: print("Transferred: " + transferAmount)
+    TransferController -> TransferController: print("Balance: " + bankomat.getUserSaldo())
+else Failed transfer
+    TransferController -> TransferController: print("Transfer failed.")
+end
+TransferController -> TransferController: close()
+@enduml

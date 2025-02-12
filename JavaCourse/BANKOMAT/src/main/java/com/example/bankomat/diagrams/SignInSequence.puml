@@ -1,0 +1,32 @@
+@startuml
+actor User
+participant SignIn_UpController
+participant Bankomat
+participant LoggedInController
+participant UI_adminController
+
+User -> SignIn_UpController: onSignUpButton(ActionEvent)
+SignIn_UpController -> Bankomat: loginExist(newLogin)
+alt User does not exist
+    SignIn_UpController -> Bankomat: addUser(new UserAdmin(newLogin, bankomat), newPIN)
+    SignIn_UpController -> SignIn_UpController: clear()
+else User exists
+    SignIn_UpController -> SignIn_UpController: showAlert("Error", "User with this login already exists!")
+end
+
+User -> SignIn_UpController: onSignInButton(ActionEvent)
+SignIn_UpController -> Bankomat: zaloguj(login, pin)
+alt Successful login
+    alt User is not admin
+        SignIn_UpController -> LoggedInController: setBankomat(bankomat)
+        SignIn_UpController -> LoggedInController: show()
+    else User is admin
+        SignIn_UpController -> UI_adminController: setBankomat(bankomat)
+        SignIn_UpController -> UI_adminController: show()
+    end
+    SignIn_UpController -> SignIn_UpController: close()
+else Failed login
+    SignIn_UpController -> SignIn_UpController: showAlert("Error", "Input data is invalid or user blocked!")
+end
+SignIn_UpController -> SignIn_UpController: clear()
+@enduml

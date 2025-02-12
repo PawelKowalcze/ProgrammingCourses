@@ -1,0 +1,37 @@
+@startuml
+package bankomat {
+    class UserAdmin {
+        - String login
+        - int PIN
+        - int numberOfTransactions
+        + void deposit(double amount)
+    }
+
+    class Bankomat {
+        - String location
+        - String currentUser
+        - double maxCapacity
+        - double amountOfMoney
+        + boolean login(String user, int pin)
+        + void blockATM()
+        + boolean withdrawMoney(double amount)
+        + void reportProblem(String problem)
+        + boolean makeBankTransfer(String toAccount, double amount)
+    }
+
+    class BankProxy {
+        - Map<UserAdmin, Double> userList
+        - String bankName
+        - Map<UserAdmin, Double> usersBalance
+        - List<String> historyOfTransactions
+        + double getBalance(UserAdmin user)
+        + List<String> getUserHistory(UserAdmin user)
+        + void blockAccount(UserAdmin user)
+        + void logTransaction(String transaction)
+        + boolean updatePIN(UserAdmin user, int oldPin, int newPin)
+    }
+
+    Bankomat --|> BankProxy
+    UserAdmin --> Bankomat
+}
+@enduml

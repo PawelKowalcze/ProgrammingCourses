@@ -1,0 +1,15 @@
+@startuml
+actor User
+participant AtmWithdrawalController
+participant Bankomat
+
+User -> AtmWithdrawalController: onConfirmButton(ActionEvent)
+AtmWithdrawalController -> Bankomat: withdrawMoney(withdrawAmount)
+alt Successful withdrawal
+    AtmWithdrawalController -> AtmWithdrawalController: print("Withdrawn: " + withdrawAmount)
+    AtmWithdrawalController -> AtmWithdrawalController: print("Balance: " + bankomat.getUserSaldo())
+else Failed withdrawal
+    AtmWithdrawalController -> AtmWithdrawalController: print("Withdrawal failed.")
+end
+AtmWithdrawalController -> AtmWithdrawalController: close()
+@enduml

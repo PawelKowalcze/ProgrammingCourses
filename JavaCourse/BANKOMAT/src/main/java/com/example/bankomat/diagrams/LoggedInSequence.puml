@@ -1,0 +1,46 @@
+@startuml
+
+actor User
+participant LoggedInController
+participant DepositController
+participant WithdrawalController
+participant TransferController
+participant ChangePinController
+participant Bankomat
+participant SignIn_UpController
+
+
+User -> LoggedInController: onDepositCashButton(ActionEvent)
+LoggedInController -> DepositController: setBankomat(bankomat)
+LoggedInController -> DepositController: show()
+LoggedInController -> LoggedInController: close()
+LoggedInController -> LoggedInController: refresh()
+
+User -> LoggedInController: onWithdrawCashButton(ActionEvent)
+LoggedInController -> WithdrawalController: setBankomat(bankomat)
+LoggedInController -> WithdrawalController: show()
+LoggedInController -> LoggedInController: close()
+LoggedInController -> LoggedInController: refresh()
+
+User -> LoggedInController: onBankTransferButton(ActionEvent)
+LoggedInController -> TransferController: setBankomat(bankomat)
+LoggedInController -> TransferController: show()
+LoggedInController -> LoggedInController: close()
+LoggedInController -> LoggedInController: refresh()
+
+User -> LoggedInController: onChangePINButton(ActionEvent)
+LoggedInController -> ChangePinController: setBankomat(bankomat)
+LoggedInController -> ChangePinController: show()
+LoggedInController -> LoggedInController: close()
+LoggedInController -> LoggedInController: refresh()
+
+User -> LoggedInController: onTransactionHistoryButton(ActionEvent)
+LoggedInController -> Bankomat: downloadUserTransactionHistory(bankomat.getCurrentUserLogin())
+
+User -> LoggedInController: onLogoutButton(ActionEvent)
+LoggedInController -> Bankomat: wyloguj()
+LoggedInController -> SignIn_UpController: setBankomat(bankomat)
+LoggedInController -> SignIn_UpController: show()
+LoggedInController -> LoggedInController: close()
+
+@enduml

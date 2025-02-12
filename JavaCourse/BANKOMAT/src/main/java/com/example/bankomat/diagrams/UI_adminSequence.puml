@@ -1,0 +1,33 @@
+@startuml
+actor Admin
+participant UI_adminController
+participant Bankomat
+participant AtmDepositController
+participant AtmWithdrawalController
+participant BlockUserController
+participant SignIn_UpController
+
+Admin -> UI_adminController: onDeposit(ActionEvent)
+UI_adminController -> AtmDepositController: setBankomat(bankomat)
+UI_adminController -> AtmDepositController: setAdminController(this)
+UI_adminController -> AtmDepositController: show()
+
+Admin -> UI_adminController: onWithdrawal(ActionEvent)
+UI_adminController -> AtmWithdrawalController: setBankomat(bankomat)
+UI_adminController -> AtmWithdrawalController: setAdminController(this)
+UI_adminController -> AtmWithdrawalController: show()
+
+Admin -> UI_adminController: onBlock(ActionEvent)
+UI_adminController -> BlockUserController: setBankomat(bankomat)
+UI_adminController -> BlockUserController: show()
+
+Admin -> UI_adminController: onLogOut(ActionEvent)
+UI_adminController -> SignIn_UpController: setBankomat(bankomat)
+UI_adminController -> SignIn_UpController: show()
+UI_adminController -> Bankomat: wyloguj()
+UI_adminController -> UI_adminController: close()
+
+Admin -> UI_adminController: onDownload(ActionEvent)
+UI_adminController -> Bankomat: downloadTransactionHistory()
+
+@enduml
