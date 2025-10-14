@@ -4,7 +4,15 @@
 
 # print(help("modules"))
 
-import math
+# import math
 # import math as m
 # from math import pi
-print(math.pi)
+# print(math.pi)
+
+import ExampleModule
+print(ExampleModule.pi)
+
+print(ExampleModule.square(5))
+print(ExampleModule.cube(10))
+print(ExampleModule.circumference(5))
+print(ExampleModule.surface_area(5))
